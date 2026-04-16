@@ -13,6 +13,7 @@ canvas.pack()
 
 in_menu = True
 game_running = False
+game_mode = None # play or continue
 scene_nr = 0
 
 ########################
@@ -29,6 +30,11 @@ def exit_menu():
 def set_scene():
     global scene_nr
     scene_nr = 0
+
+def next_scene():
+    global scene_nr
+    if scene_nr < 5:
+        scene_nr += 1
 
 play = tk.Button(
     root, 
@@ -54,6 +60,25 @@ canvas.create_window(600, 300,anchor="center", window=play)
 #---scene variables---#
 scene0_img = ImageTk.PhotoImage(Image.open("assets\Scene_pictures\Scene1.png"))
 
+choice_1 = tk.Button(
+    root, 
+    text="Look around", 
+    command=next_scene,
+    font=("Arial", 20),
+    bg="#B0C4DE",
+    width=10,
+    height=1
+)
+
+choice_2 = tk.Button(
+    root, 
+    text="Play", 
+    command=exit_menu,
+    font=("Arial", 20),
+    bg="#B0C4DE",
+    width=10,
+    height=1
+)
 
 ##############################333333
 
@@ -62,7 +87,6 @@ scene0_img = ImageTk.PhotoImage(Image.open("assets\Scene_pictures\Scene1.png"))
 
 
 #---game variables and functions---#
-
 
 
 
@@ -82,10 +106,12 @@ def game_code():
         width=4)
 
     canvas.create_text(5, 600,
-    text= "What happened? Everyone is dead, but me",
+    text= "What happened? Everyone is dead, but me\n my head",
     fill="black", 
     font=("Arial", 18),
     anchor="nw")
+
+    canvas.create_window(1000, 600,anchor="nw", window=choice_1)
 
 root.mainloop()
 
