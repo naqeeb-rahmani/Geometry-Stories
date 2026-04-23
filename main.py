@@ -33,11 +33,11 @@ def next_scene_1():
     global scene_nr
     global choice
 
-    if scene_nr == 2 and choice == True:
+    if (scene_nr == 2 and choice == True) or scene_nr == 4:
         to_menu()
     else:
-
-        choice = False
+        if scene_nr != 3:
+            choice = False
     
         scene_nr += 1
     game_code()
@@ -46,18 +46,15 @@ def next_scene_2():
     global scene_nr
     global choice    
 
-    if scene_nr == 2 and choice == True:
-        to_menu()
-    else:
+    choice = True
 
-        choice = True
-
-        scene_nr += 1
+    scene_nr += 1
     game_code()
 
 def exit_menu_and_set_scene_1():
     global scene_nr
-    scene_nr += 1
+    scene_nr = 1
+
     exit_menu()
 
 play = tk.Button(
@@ -109,7 +106,7 @@ choice_1 = tk.Button(
 
 choice_2 = tk.Button(
     root, 
-    text="stay", 
+    text="Stay", 
     command=next_scene_2,
     font=("Arial", 20),
     bg="#B0C4DE",
@@ -150,7 +147,9 @@ def game_code():
 
         if scene_nr == 1:
             canvas.create_image(-50,0, anchor="nw", image=scene1_img)
-
+            scene_text_var = "Ugh... my head. What happened? Did i pass out? \nOh, no. Why isnt anyone moving. Could it be that i'm the only one alive?"
+            choice_1.config(text="Look around")
+            choice_2.config(text="Stay")
 
         elif scene_nr == 2:
             if choice == False:
@@ -162,7 +161,7 @@ def game_code():
             else:
                 canvas.create_image(-50,-100, anchor="nw", image=scene2_c2_img)
                 choice_1.config(text="Menu")
-                scene_text_var = "No, i cant leave them. Not this time. \n*You died from hunger after around 24 hours."
+                scene_text_var = "No, i cant leave them. Not this time. \n*You died from hunger after around 24 hours.\n GEOMETRY STORIES: THE SHARED GRAVE"
                 
         elif scene_nr == 3:
             if choice == False:
@@ -177,12 +176,12 @@ def game_code():
             if choice == False:
                 canvas.create_image(-50,-100, anchor="nw", image=scene4_c1_img)
                 choice_1.config(text="Menu")    
-                scene_text_var = "scene4_c1"
+                scene_text_var = "We reached the platform just in time. The Guard held the line while I prepped the engines. \nAs the thrusters ignited, I looked down. He wasn't just a machine, he was infact a friend. \nIn the end, the square world didn't feel so cold.\n GEOMETRY STORIES: THE ALLIANCE"
             
             else: 
                 canvas.create_image(-50,-100, anchor="nw", image=scene4_c2_img)
-                choice_2.config(text="Menu")
-                scene_text_var = "scene4_c2"      
+                choice_1.config(text="Menu")
+                scene_text_var = "It’s held together by scrap and desperation, but it flies. I did it alone. \nNo guards, no help, no witnesses. The city shrinks into a tiny gray grid below me \nas I leave this graveyard behind. I’m going home but I'll never forget you, friends.\n GEOMETRY STORIES: THE SOLO RUN"      
 
 
         canvas.create_rectangle(
@@ -200,9 +199,10 @@ def game_code():
 
         canvas.create_window(1000, 560,anchor="nw", window=choice_1)
         
-    
-        canvas.create_window(1000, 620,anchor="nw", window=choice_2)
-
-        print(choice)
+        if scene_nr not in [3, 4]:
+            if scene_nr == 2 and choice == True:
+                return
+            else:
+                canvas.create_window(1000, 620,anchor="nw", window=choice_2)
 
 root.mainloop()
