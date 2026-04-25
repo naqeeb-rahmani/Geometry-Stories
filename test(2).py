@@ -67,14 +67,24 @@ play = tk.Button(
     height=1
 )
 
+
+def special(): 
+    canvas.delete("all")
+
+e_e = tk.Button(
+    root, 
+    text="None", 
+    command=special,
+    font=("Arial", 20),
+    bg="#B0C4DE",
+    width=10,
+    height=1
+)
+
 ##############################
 
 #---menu---#
-menu_bg = ImageTk.PhotoImage(Image.open("assets\Menu.png"))
-canvas.create_image(-50,0, anchor="nw", image=menu_bg)
-
-canvas.create_window(600, 300,anchor="center", window=play)
-
+menu_bg = ImageTk.PhotoImage(Image.open("assets\menu_plus_extra_pictures\Menu.png"))
 
 ##########################
 
@@ -141,6 +151,7 @@ def game_code():
     if in_menu == True and game_running == False:
         canvas.create_image(-50,0, anchor="nw", image=menu_bg)
 
+        canvas.create_window(598, 301,anchor="center", window=e_e)
         canvas.create_window(600, 300,anchor="center", window=play)
 
     elif in_menu == False and game_running == True:
@@ -205,4 +216,5 @@ def game_code():
             else:
                 canvas.create_window(1000, 620,anchor="nw", window=choice_2)
 
+game_code()
 root.mainloop()
