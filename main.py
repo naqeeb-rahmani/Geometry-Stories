@@ -70,11 +70,7 @@ play = tk.Button(
 ##############################
 
 #---menu---#
-menu_bg = ImageTk.PhotoImage(Image.open("assets\Menu.png"))
-canvas.create_image(-50,0, anchor="nw", image=menu_bg)
-
-canvas.create_window(600, 300,anchor="center", window=play)
-
+menu_bg = ImageTk.PhotoImage(Image.open("assets\menu_plus_extra_pictures\Menu.png"))
 
 ##########################
 
@@ -205,4 +201,5 @@ def game_code():
             else:
                 canvas.create_window(1000, 620,anchor="nw", window=choice_2)
 
+game_code()
 root.mainloop()
